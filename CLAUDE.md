@@ -101,11 +101,14 @@ everything else validated here.
 - No automated tests -- this repo is almost entirely a Dockerfile + a
   ~150-line seed script; validated by hand against a real instance so far,
   not under CI.
-- This repo picked up the same auto-onboarded `planka-sync.yml` workflow
-  jellyfin-watch-sync had -- harmless while this repo stays private (only
-  a collaborator can open issues here), but **strip it before ever making
-  this repo public**, same reasoning as the real incident already handled
-  on jellyfin-watch-sync itself (see that project's session history):
-  it triggers on `issues` with no check on who opened one, which is fine
-  behind private-repo access control and would not be once anyone on the
-  internet could open an issue here.
+- ~~planka-sync.yml exposure~~ DONE 2026-09-02 -- removed proactively
+  during a pre-public privacy/security sweep, ahead of actually going
+  public. This repo had picked up the same auto-onboarded workflow
+  jellyfin-watch-sync did, which triggers on `issues` with no check on who
+  opened one -- harmless behind private-repo access control, but would
+  have let any anonymous internet user fire an automated run using a
+  privileged classic PAT against private infrastructure and the real
+  Planka board the moment this repo went public (same incident already
+  handled on jellyfin-watch-sync itself, see that project's own history).
+  Full-repo sweep otherwise came back clean: no real credentials, API
+  keys, DSNs, or infra IPs anywhere in the git history or working tree.
