@@ -1,0 +1,8 @@
+# Shell scripts and the Dockerfile that COPYs them must stay LF -- a CRLF
+# shebang line breaks under bash inside the container. Confirmed this
+# repo's own script currently checks out clean only because it was
+# written directly, not through a CRLF-converting checkout; this pins
+# that behavior for every future clone regardless of the cloning
+# machine's git config.
+*.sh text eol=lf
+Dockerfile text eol=lf
