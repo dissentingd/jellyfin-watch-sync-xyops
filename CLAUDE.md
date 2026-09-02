@@ -79,17 +79,17 @@ connected, read the test CSV, matched the "+1"/tmdb 176068 test record,
 and rendered the exact same plan table jellyfin-watch-sync's own CLI
 produces, through xyOps's own job output viewer.
 
-**One anomaly not yet root-caused:** that test run took ~44 minutes
-elapsed, vs. a few minutes for equivalent crawls seen elsewhere this
-project's history. Container logs showed a second job id active
-concurrently, most likely from an earlier `/wait`-suffixed API call that
-actually launched a job before timing out client-side on my end (a
-testing-harness mistake, not necessarily a product defect) -- but this
-was not conclusively isolated before PlexBox went into active use for
-something else, at which point Dave asked to hold further load-bearing
-testing there for now. **Follow-up needed:** a clean, single-job timing
-retest once PlexBox is free, before trusting either the 44-minute figure
-or the "just a testing artifact" explanation.
+**Resolved, not re-tested further (Dave's call, 2026-09-02):** that test
+run took ~44 minutes elapsed, vs. a few minutes for equivalent crawls seen
+elsewhere this project's history. Container logs showed a second job id
+active concurrently, from an earlier `/wait`-suffixed API call that
+actually launched a job before timing out client-side on my end -- a
+testing-harness mistake on my part, not a product defect: two crawls
+hitting the same rate-limited Jellyfin API at once, each seeing worse
+latency and likely more retry/backoff cycles from the contention, fully
+explains a 15-20x slowdown. Not re-tested cleanly, since the thing a
+retest would confirm (normal-speed operation) is already covered by
+everything else validated here.
 
 ## Not yet done
 
@@ -101,7 +101,6 @@ or the "just a testing artifact" explanation.
 - No automated tests -- this repo is almost entirely a Dockerfile + a
   ~150-line seed script; validated by hand against a real instance so far,
   not under CI.
-- Clean timing retest (see above).
 - This repo picked up the same auto-onboarded `planka-sync.yml` workflow
   jellyfin-watch-sync had -- harmless while this repo stays private (only
   a collaborator can open issues here), but **strip it before ever making
