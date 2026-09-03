@@ -9,7 +9,11 @@ given the Jellyfin self-hosting community skews toward less technical
 users, and specifically asked to check for an existing plug-and-play
 project rather than hand-rolling one from scratch.
 
-**Repo:** private for now — `gh repo view dissentingd/jellyfin-watch-sync-xyops`.
+**Repo:** public since 2026-09-02 — `gh repo view dissentingd/jellyfin-watch-sync-xyops`.
+Flipped public right after a pre-public privacy/security sweep (see below)
+came back clean and the auto-onboarded `planka-sync.yml` exposure was
+removed. Cross-linked from jellyfin-watch-sync's own README for anyone
+looking for a GUI instead of the CLI.
 
 ## Why xyOps, not a hand-rolled FastAPI app, not Cronicle
 
